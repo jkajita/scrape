@@ -1,17 +1,12 @@
-var express = require('express');
-var fs = require('fs');
-var request = require('request');
-var cheerio = require('cheerio');
-var app     = express();
+// モジュール読み込み
+var client = require('cheerio-httpcli');
 
-app.get('/scrape', function(req, res){
+// スクレイピング開始
+client.fetch('http://rei19.hatenablog.com/archive/2013', {}, function (err, $, res) {
 
-  //All the web scraping magic will happen here
+  // 記事のタイトルを取得
+  $('.entry-title-link').each(function() {
+    console.log($(this).text());
+  });
 
-})
-
-app.listen('8081')
-
-console.log('Magic happens on port 8081');
-
-exports = module.exports = app;
+});
